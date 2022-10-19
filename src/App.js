@@ -1,5 +1,5 @@
 import './App.css';
-import freeCodeCampLogo from './imagenes/freecodecamp-logo.png';
+import Logo from './componentes/Logo';
 import Pantalla from './componentes/Pantalla';
 import Boton from './componentes/Boton';
 import BotonClear from './componentes/BotonClear';
@@ -21,19 +21,26 @@ function App() {
   };
 
   //
-  const agregarInput = valor => {
-    setInput(input + valor);
+ const agregarInput = valor => {
+     let operadores = '.+-*/';
+
+     if (!input && !operadores.includes(valor)) {
+          setInput(input + valor);
+      }
+      else {
+         if (operadores.includes(input.substr(-1)) && operadores.includes(valor)) {
+              alert('Error: debe ingresar un numero...');
+          }
+          else {
+            setInput(input + valor);
+          }
+      }
   };
 
   //
   return (
     <div className='App'>
-      <div className='freecodecamp-contenedor-logo'>
-        <img 
-          className='freecodecamp-logo'
-          src={freeCodeCampLogo}
-          alt='Logo de freeCodeCamp' />
-      </div>
+      <Logo />
 
       <div className='contenedor-principal'>
         <Pantalla input={input}/>
